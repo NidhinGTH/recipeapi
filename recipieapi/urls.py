@@ -20,6 +20,10 @@ from rest_framework.routers import DefaultRouter
 from recipieapp import views
 from rest_framework.authtoken import views as rviews
 
+
+
+
+
 router = DefaultRouter()
 router.register('recipe', views.RecipeView)
 router.register('review', views.ReviewView)
@@ -28,4 +32,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('api-token-auth/', rviews.obtain_auth_token),
+
+
 ]
