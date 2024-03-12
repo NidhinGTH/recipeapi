@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.db.models import Q
-from django.shortcuts import render
-from rest_framework import viewsets, mixins, generics
+from rest_framework import viewsets, mixins
 from .models import Recipe,Review
 from .serializers import RecipeSerializer,ReviewSerializer,UserSerializer
 from rest_framework.permissions import IsAuthenticated
@@ -16,13 +15,10 @@ class RecipeView(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-
-        # Get parameters from the request
         cuisine = self.request.query_params.get('cuisine')
         meal_type = self.request.query_params.get('meal_type')
         ingredients = self.request.query_params.getlist('ingredients')
 
-        # Apply filters if they exist
         if cuisine:
             queryset = queryset.filter(cuisine__icontains=cuisine)
         if meal_type:
